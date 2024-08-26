@@ -1,5 +1,5 @@
-CREATE DATABASE Hotel
-USE Hotel
+CREATE DATABASE Hotel;
+USE Hotel;
 
 Create Table Hospedes (
 CPF varchar (12) not null,
@@ -10,16 +10,16 @@ dataNascimento datetime,
 
 Primary Key (CPF),
 check (sexo in ('M', 'F'))
-)
+);
 
 Create Table Quartos (
 numero int not null,
 tipo varchar (40),
-valorDiaria money,
+valorDiaria double,
 
 Primary Key (numero),
 check (valorDiaria > 0)
-)
+);
 
 Create Table Estadias (
 hospede varchar(12) not null,
@@ -30,77 +30,75 @@ dataSaida datetime,
 Foreign Key (hospede) References Hospedes (CPF),
 Foreign Key (quarto) References Quartos (numero),
 Check (dataSaida > dataEntrada)
-)
+);
 
 Create Table Servicos (
 codServico int not null,
 descricao varchar (40),
-preco money,
+preco double,
 
 Primary Key (codServico),
 check (preco > 0)
-)
-
+);
+drop table Solicitacoes;
 Create Table Solicitacoes (
 hospede varchar(12) not null,
 servico int not null,
-data datetime,
-hora datetime,
+dataSolicitacoes datetime,
+hora time,
 
 Foreign Key (hospede) References Hospedes (CPF),
 Foreign Key (servico) References Servicos (codServico)
-)
+);
 
 
-USE Hotel
-SET DATEFORMAT YMD
+USE Hotel;
 
-Insert Into Hospedes Values ('159874256911', 'Maria dos Santos', 'Av. Epitácio Pessoa, 21, João Pessoa', 'F', '1960-02-06')
-Insert Into Hospedes Values ('547221658922', 'João Augusto Trindade', 'R. das Flores, 33, Recife', 'M', '1980-05-14')
-Insert Into Hospedes Values ('522655488922', 'Ana Maria Pereira', 'R. Augusta, 51, São Paulo', 'F', '1972-08-09')
-Insert Into Hospedes Values ('922411035844', 'Luiza Costa', 'Av. Epitácio Pessoa, 297, João Pessoa', 'F', '1985-12-24')
-Insert Into Hospedes Values ('241699512000', 'Francisco Chaves dos Santos', 'R. Aurora, 95, Maceió', 'M', '1955-09-06')
-Insert Into Hospedes Values ('621000385221', 'Antônio Alves', 'R. José Firmino, 33, Rio de Janeiro', 'M', '1980-05-09')
-Insert Into Hospedes (cpf, nome, endereco, sexo) Values ('453982210087', 'Marieta Gonçalves', 'R. Luiz Paiva, 90, Curitiba', 'F')
+Insert Into Hospedes Values ('159874256911', 'Maria dos Santos', 'Av. Epitï¿½cio Pessoa, 21, Joï¿½o Pessoa', 'F', '1960-02-06');
+Insert Into Hospedes Values ('547221658922', 'Joï¿½o Augusto Trindade', 'R. das Flores, 33, Recife', 'M', '1980-05-14');
+Insert Into Hospedes Values ('522655488922', 'Ana Maria Pereira', 'R. Augusta, 51, Sï¿½o Paulo', 'F', '1972-08-09');
+Insert Into Hospedes Values ('922411035844', 'Luiza Costa', 'Av. Epitï¿½cio Pessoa, 297, Joï¿½o Pessoa', 'F', '1985-12-24');
+Insert Into Hospedes Values ('241699512000', 'Francisco Chaves dos Santos', 'R. Aurora, 95, Maceiï¿½', 'M', '1955-09-06');
+Insert Into Hospedes Values ('621000385221', 'Antï¿½nio Alves', 'R. Josï¿½ Firmino, 33, Rio de Janeiro', 'M', '1980-05-09');
+Insert Into Hospedes (cpf, nome, endereco, sexo) Values ('453982210087', 'Marieta Gonï¿½alves', 'R. Luiz Paiva, 90, Curitiba', 'F');
 INSERT INTO Hospedes (CPF, nome, endereco, sexo, dataNascimento) VALUES ('12345678901', 'John Smith', '123 Main St, City, State', 'M', '1990-05-15');
 INSERT INTO Hospedes (CPF, nome, endereco, sexo, dataNascimento) VALUES ('98765432109', 'Jane Doe', '456 Elm St, Town, State', 'F', '1988-07-20');
 INSERT INTO Hospedes (CPF, nome, endereco, sexo, dataNascimento) VALUES ('55555555555', 'Bob Johnson', '789 Oak St, Village, State', 'M', '1995-03-25');
-Insert Into Hospedes (cpf, nome, endereco, sexo) Values ('452981110385', 'Ana Paula Abrantes', 'R. Amparadouro Pereira, 80, São Paulo', 'F')
-Insert Into Hospedes (cpf, nome, endereco, sexo) Values ('651582954399', 'Mário Augisto Tarantela', 'R. das Flores, 55, Recife', 'M')
+Insert Into Hospedes (cpf, nome, endereco, sexo) Values ('452981110385', 'Ana Paula Abrantes', 'R. Amparadouro Pereira, 80, Sï¿½o Paulo', 'F');
+Insert Into Hospedes (cpf, nome, endereco, sexo) Values ('651582954399', 'Mï¿½rio Augisto Tarantela', 'R. das Flores, 55, Recife', 'M');
 
 
 
---select * from Hospedes
 
-Insert Into Quartos Values (220, 'Standard', 250.60)
-Insert Into Quartos Values (230, 'Suíte Master', 700)
-Insert Into Quartos Values (240, 'Luxo Superior', 520)
-Insert Into Quartos Values (250, 'Suíte Presidencial', 950)
-Insert Into Quartos Values (320, 'Standard', 250.60)
-Insert Into Quartos Values (330, 'Luxo Superior', 520)
-Insert Into Quartos Values (340, 'Suíte Master', 700)
+Insert Into Quartos Values (220, 'Standard', 250.60);
+Insert Into Quartos Values (230, 'Suï¿½te Master', 700);
+Insert Into Quartos Values (240, 'Luxo Superior', 520);
+Insert Into Quartos Values (250, 'Suï¿½te Presidencial', 950);
+Insert Into Quartos Values (320, 'Standard', 250.60);
+Insert Into Quartos Values (330, 'Luxo Superior', 520);
+Insert Into Quartos Values (340, 'Suï¿½te Master', 700);
 
---select * from Quartos
+select * from Quartos;
 
-Insert Into Estadias Values ('159874256911', 220, '2011-12-14', '2011-12-24')
-Insert Into Estadias Values ('547221658922', 230, '2011-01-01', '2011-01-10')
-Insert Into Estadias Values ('522655488922', 340, '2011-08-09', '2011-08-20')
-Insert Into Estadias Values ('159874256911', 330, '2011-02-05', '2011-02-09')
-Insert Into Estadias Values ('922411035844', 250, '2011-07-05', '2011-07-22')
-Insert Into Estadias Values ('241699512000', 220, '2011-05-21', '2011-05-25')
-Insert Into Estadias Values ('621000385221', 330, '2012-03-03', '2012-03-09')
-Insert Into Estadias Values ('621000385221', 340, '2012-09-01', '2012-09-04')
-Insert Into Estadias Values ('547221658922', 330, '2012-06-20', '2012-06-30')
-Insert Into Estadias Values ('922411035844', 250, '2012-10-10', '2012-10-15')
-Insert Into Estadias Values ('922411035844', 330, '2012-03-12', '2012-03-15')
-Insert Into Estadias Values ('547221658922', 340, '2012-10-04', '2012-10-08')
-Insert Into Estadias Values ('547221658922', 340, '2012-01-04', '2012-01-08')
-Insert Into Estadias Values ('621000385221', 330, '2012-01-12', '2012-01-15')
-Insert Into Estadias Values ('241699512000', 250, '2012-02-20', '2012-02-22')
-Insert Into Estadias Values ('547221658922', 330, '2012-04-20', '2012-04-23')
-Insert Into Estadias Values ('621000385221', 250, '2012-06-12', '2012-06-15')
-Insert Into Estadias Values ('241699512000', 220, '2012-08-20', '2012-08-24')
-Insert Into Estadias Values ('621000385221', 340, '2012-09-01', '2012-09-04')
+Insert Into Estadias Values ('159874256911', 220, '2011-12-14', '2011-12-24');
+Insert Into Estadias Values ('547221658922', 230, '2011-01-01', '2011-01-10');
+Insert Into Estadias Values ('522655488922', 340, '2011-08-09', '2011-08-20');
+Insert Into Estadias Values ('159874256911', 330, '2011-02-05', '2011-02-09');
+Insert Into Estadias Values ('922411035844', 250, '2011-07-05', '2011-07-22');
+Insert Into Estadias Values ('241699512000', 220, '2011-05-21', '2011-05-25');
+Insert Into Estadias Values ('621000385221', 330, '2012-03-03', '2012-03-09');
+Insert Into Estadias Values ('621000385221', 340, '2012-09-01', '2012-09-04');
+Insert Into Estadias Values ('547221658922', 330, '2012-06-20', '2012-06-30');
+Insert Into Estadias Values ('922411035844', 250, '2012-10-10', '2012-10-15');
+Insert Into Estadias Values ('922411035844', 330, '2012-03-12', '2012-03-15');
+Insert Into Estadias Values ('547221658922', 340, '2012-10-04', '2012-10-08');
+Insert Into Estadias Values ('547221658922', 340, '2012-01-04', '2012-01-08');
+Insert Into Estadias Values ('621000385221', 330, '2012-01-12', '2012-01-15');
+Insert Into Estadias Values ('241699512000', 250, '2012-02-20', '2012-02-22');
+Insert Into Estadias Values ('547221658922', 330, '2012-04-20', '2012-04-23');
+Insert Into Estadias Values ('621000385221', 250, '2012-06-12', '2012-06-15');
+Insert Into Estadias Values ('241699512000', 220, '2012-08-20', '2012-08-24');
+Insert Into Estadias Values ('621000385221', 340, '2012-09-01', '2012-09-04');
 INSERT INTO Estadias (hospede, quarto, dataEntrada, dataSaida) VALUES ('12345678901', 220, '2023-09-18', '2023-09-20');
 INSERT INTO Estadias (hospede, quarto, dataEntrada, dataSaida) VALUES ('98765432109', 230, '2023-09-19', '2023-09-22');
 INSERT INTO Estadias (hospede, quarto, dataEntrada, dataSaida) VALUES ('55555555555', 240, '2023-09-20', '2023-09-23');
@@ -126,28 +124,28 @@ INSERT INTO Estadias (hospede, quarto, dataEntrada, dataSaida) VALUES ('55555555
 INSERT INTO Estadias (hospede, quarto, dataEntrada, dataSaida) VALUES ('452981110385', 220, '2023-05-05', '2023-05-07');
 INSERT INTO Estadias (hospede, quarto, dataEntrada, dataSaida) VALUES ('651582954399', 330, '2023-01-04', '2023-01-10');
 
---select * from Estadias
+select * from Estadias;
 
-Insert Into Servicos Values (1, 'Lavanderia', 45)
-Insert Into Servicos Values (2, 'Passadeira', 25.50)
-Insert Into Servicos Values (3, 'Babá', 330)
-Insert Into Servicos Values (4, 'Café no Quarto', 64.50)
-Insert Into Servicos Values (5, 'Lanchonete', 50)
+Insert Into Servicos Values (1, 'Lavanderia', 45);
+Insert Into Servicos Values (2, 'Passadeira', 25.50);
+Insert Into Servicos Values (3, 'Babï¿½', 330);
+Insert Into Servicos Values (4, 'Cafï¿½ no Quarto', 64.50);
+Insert Into Servicos Values (5, 'Lanchonete', 50);
 
---select * from Servicos
-
-Insert Into Solicitacoes Values ('159874256911', 1, '2011-12-15', '09:30:00')
-Insert Into Solicitacoes Values ('547221658922', 5, '2011-01-09', '22:15:20')
-Insert Into Solicitacoes Values ('621000385221', 3, '2011-09-03', '13:00:00')
-Insert Into Solicitacoes Values ('922411035844', 1, '2012-10-12', '20:06:52')
-Insert Into Solicitacoes Values ('922411035844', 4, '2012-07-10', '11:32:41')
-Insert Into Solicitacoes Values ('922411035844', 4, '2012-03-14', '15:22:00')
-Insert Into Solicitacoes Values ('547221658922', 1, '2012-10-05', '07:11:41')
-Insert Into Solicitacoes Values ('547221658922', 5, '2012-01-05', '10:20:00')
-Insert Into Solicitacoes Values ('241699512000', 1, '2012-02-21', '19:55:22')
-Insert Into Solicitacoes Values ('547221658922', 3, '2012-04-22', '19:06:52')
-Insert Into Solicitacoes Values ('241699512000', 4, '2012-08-21', '09:43:55')
-Insert Into Solicitacoes Values ('621000385221', 5, '2012-09-03', '17:09:00')
+select * from Servicos;
+select * from Solicitacoes;
+Insert Into Solicitacoes Values ('159874256911', 1, '2011-12-15', '09:30:00');
+Insert Into Solicitacoes Values ('547221658922', 5, '2011-01-09', '22:15:20');
+Insert Into Solicitacoes Values ('621000385221', 3, '2011-09-03', '13:00:00');
+Insert Into Solicitacoes Values ('922411035844', 1, '2012-10-12', '20:06:52');
+Insert Into Solicitacoes Values ('922411035844', 4, '2012-07-10', '11:32:41');
+Insert Into Solicitacoes Values ('922411035844', 4, '2012-03-14', '15:22:00');
+Insert Into Solicitacoes Values ('547221658922', 1, '2012-10-05', '07:11:41');
+Insert Into Solicitacoes Values ('547221658922', 5, '2012-01-05', '10:20:00');
+Insert Into Solicitacoes Values ('241699512000', 1, '2012-02-21', '19:55:22');
+Insert Into Solicitacoes Values ('547221658922', 3, '2012-04-22', '19:06:52');
+Insert Into Solicitacoes Values ('241699512000', 4, '2012-08-21', '09:43:55');
+Insert Into Solicitacoes Values ('621000385221', 5, '2012-09-03', '17:09:00');
 INSERT INTO Solicitacoes (hospede, servico, data, hora) VALUES ('12345678901', 1, '2023-09-18', '10:00:00');
 INSERT INTO Solicitacoes (hospede, servico, data, hora) VALUES ('98765432109', 2, '2023-09-19', '14:30:00');
 INSERT INTO Solicitacoes (hospede, servico, data, hora) VALUES ('55555555555', 3, '2023-09-20', '16:45:00');
@@ -168,4 +166,29 @@ INSERT INTO Solicitacoes (hospede, servico, data, hora) VALUES ('621000385221', 
 INSERT INTO Solicitacoes (hospede, servico, data, hora) VALUES ('12345678901', 3, '2022-10-15', '13:20:00');
 INSERT INTO Solicitacoes (hospede, servico, data, hora) VALUES ('12345678901', 1, '2015-05-15', '10:30:00');
 
-select * from Hospedes
+
+#Exibir os dados dos hÃ³spedes que nÃ£o informaram data de nascimento
+SELECT dataNascimento FROM Hospedes
+WHERE dataNascimento IS NULL;
+
+#Exibir os dados dos hÃ³spedes que informaram data de nascimento
+SELECT * FROM hospedes
+WHERE dataNascimento IS NOT NULL;
+
+#Ordena os resultados por data de nascimento em ordem crescente.
+SELECT CPF, nome, sexo
+FROM hospedes
+ORDER BY nome;
+
+#Ordena os resultados por data de nascimento em ordem decrescente.
+SELECT nome, dataNascimento
+FROM hospedes
+ORDER BY nome DESC;
+
+#GROUP BY Ã© usada para agrupar linhas que possuem valores iguais em colunas especificadas.
+#Exibir a quantidade de homens e mulheres hÃ³spedes.
+SELECT sexo, COUNT(*) AS total
+FROM hospedes
+GROUP BY sexo
+LIMIT 0, 1000;
+
