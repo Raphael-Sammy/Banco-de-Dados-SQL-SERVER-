@@ -7,7 +7,7 @@ where	so.data between '01-09-2023'
 and '30-09-2023' and s.codServico = so.servico;
 
 select  nome, hora from Hospedes h, Servicos s, Solicitacoes so
-where s.descricao in ('Lavandeira','Babá') and h.CPF = so.hospede and so.servico = s.codServico;
+where s.descricao in ('Lavandeira','BabÃ¡') and h.CPF = so.hospede and so.servico = s.codServico;
 
 
 select hospede, servico
@@ -54,3 +54,22 @@ and q.valorDiaria > '500' and s.descricao in('Lanchonete','Passadeira');
 
 select * from Solicitacoes
 
+
+select sexo, count(*)
+from Hospedes 
+group by sexo;
+
+
+select h.nome, count(*)
+from Hospedes h, Estadias e
+where h.CPF = e.hospede and e.dataEntrada Between '01-01-2018' and '31-12-2021'
+group by h.nome
+having count(*) >= 2;
+
+
+
+select descricao, preco, count(*) quantidade, sum(preco) valorTotal
+from  Servicos se, Solicitacoes so
+where se.codServico = so.servico 
+group by se.descricao, se.preco
+having sum(se.preco) > 500;
